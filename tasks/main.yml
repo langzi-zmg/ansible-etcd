@@ -1,0 +1,20 @@
+- name: copy bin
+  copy:
+    src: "{{ item }}"
+    dest: /usr/local/bin/
+    owner: "root"
+    mode: 0755
+  with_fileglob:
+   - soft/bin/*
+
+- name: copy supervisorctl etcd conf
+  copy: src=conf/etcd1.conf dest=/etc/supervisor/conf.d
+  when: "'etcd1' in group_names"
+
+- name: copy supervisorctl etcd conf
+  copy: src=conf/etcd2.conf dest=/etc/supervisor/conf.d
+  when: "'etcd2' in group_names"
+
+- name: copy supervisorctl etcd conf
+  copy: src=conf/etcd3.conf dest=/etc/supervisor/conf.d
+  when: "'etcd3' in group_names"
